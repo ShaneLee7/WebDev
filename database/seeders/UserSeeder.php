@@ -13,6 +13,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)->create(); // Adjust the number as needed
+        User::factory(20)->create(); // Adjust the number as needed
     }
 }

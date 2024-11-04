@@ -30,7 +30,7 @@ class CommentSeeder extends Seeder
             foreach ($comments as $comment) {
                 Comment::factory(rand(0, 3))->create([
                     'post_id' => $post->id,
-                    'parent_id' => $comment->id, // Set as a reply to the top-level comment
+                    'parent_id' => $comment->id, // Set parent id once replied
                 ]);
             }
         }

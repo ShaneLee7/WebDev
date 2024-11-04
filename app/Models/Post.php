@@ -35,11 +35,23 @@ class Post extends Model
     /**
      * Get the comments for the post.
      *
-     * @return HasMany
+     * @return int
      */
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
+
+    /**
+     * Get the likes for the post.
+     *
+     * @return int
+     */
+    public function likes(): HasMany
+    {
+        return $this->hasMany(Like::class);
+    }
+
+
 }
 

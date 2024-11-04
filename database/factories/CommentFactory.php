@@ -22,12 +22,12 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         return [
-            // Use an existing user randomly instead of creating a new one
+            // Use an existing user to randomly generate comments/replies
             'user_id' => User::inRandomOrder()->first()->id,
-            // Use an existing post randomly instead of creating a new one
+            // Use an existing post to generate replies
             'post_id' => Post::inRandomOrder()->first()->id,
             'content' => $this->faker->text(100),
-            'parent_id' => null, // Top-level comment does not have a parent
+            'parent_id' => null,
         ];
     }
 

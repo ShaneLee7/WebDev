@@ -15,8 +15,8 @@ class Like extends Model
         'post_id',
     ];
     /**
-     * Get the original comment
-     *
+     * Get the user that owns the like
+     * 
      * @return string
      */
     public function user()
@@ -25,7 +25,7 @@ class Like extends Model
     }
 
     /**
-     * Get the original post
+     * Get the liked post
      *
      * @return string
      */
@@ -34,13 +34,5 @@ class Like extends Model
         return $this->belongsTo(Post::class);
     }
 
-   /**
-     * Get the total number of likes for the comment.
-     *
-     * @return int
-     */
-    public function totalLikes(): int
-    {
-        return $this->hasMany(Like::class)->count();
-    }
+
 }

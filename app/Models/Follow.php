@@ -16,21 +16,24 @@ class Follow extends Model
     ];
 
     /**
-     * Get the original comment
+     * Get the user that is a follower
      *
-     * @return string
+     * @return int
      */
     public function follower()
     {
         return $this->belongsTo(User::class, 'follower_id');
     }
+    
     /**
-     * Get the original comment
-     *
-     * @return string
-     */
+    * Get the user that is followed.
+    *
+    * @return int
+    */
     public function followed()
-    {
-        return $this->belongsTo(User::class, 'followed_id');
-    }
+{
+    return $this->belongsTo(User::class, 'followed_id');
+}
+
+
 }
