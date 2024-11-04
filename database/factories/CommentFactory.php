@@ -22,9 +22,12 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory(), // Create a new user for the comment
-            'post_id' => Post::factory(), // Create a new post for the comment
-            'body' => $this->faker->sentence, // Random sentence for the comment
+            'user_id' => User::inRandomOrder()->first()->id,
+            'post_id' => Post::inRandomOrder()->first()->id,
+            'content' => $this->faker->sentence(),
+            'parent_id' => null, // Will set for replies later in ReplySeeder
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

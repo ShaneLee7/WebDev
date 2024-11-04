@@ -22,9 +22,10 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory(), // Create a new user for the post
-            'title' => $this->faker->sentence,  // Random tile
-            'body' => $this->faker->paragraph,  // Random sentence for the comment body
+            'user_id' => User::inRandomOrder()->first()->id, // Assign a random user as the post's author
+            'content' => $this->faker->paragraph(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }
