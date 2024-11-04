@@ -9,12 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('replies', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+            $table->id(); // Primary key
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key for the user
+            $table->foreignId('comment_id')->constrained()->onDelete('cascade'); // Foreign key for the comment
+            $table->text('content'); // The content of the reply
+            $table->timestamps(); // Created at and updated at
+    });
     }
 
     /**

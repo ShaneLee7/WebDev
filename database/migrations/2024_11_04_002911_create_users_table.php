@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id(); // Auto-incrementing ID
             $table->string('name'); // User's name
             $table->string('email')->unique(); // User's email (unique)
-            $table->string('password'); // User's password
-            $table->string('avatar')->nullable(); // User's avatar (optional)
             $table->timestamp('email_verified_at')->nullable(); // Email verification timestamp
+            $table->string('password'); // User's password
             $table->rememberToken(); // Token for "remember me" functionality
             $table->timestamps(); // Created at and updated at timestamps
         });
