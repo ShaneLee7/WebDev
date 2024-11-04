@@ -16,14 +16,22 @@ class CommentSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create a few posts to associate comments with
-        $posts = Post::all()->create(); // Adjust the number of posts as needed
+        // Fetch all posts to associate comments with
+        $posts = Post::all();
 
         // Create comments for each post
         foreach ($posts as $post) {
-            // Create top-level comments, each with replies
-            foreach (range(1, 3) as $index) { // Adjust number of top-level comments as needed
-                Comment::factory()->createWithReplies(rand(1, 3)); // Create a comment with 1-3 replies
+            // Create top-level comments
+            $comments = Comment::factory(3)->create([
+                'post_id' => $post->id,
+            ]);
+
+            // Create replies for each top-level comment
+            foreach ($comments as $comment) {
+                Comment::factory(rand(0, 3))->create([
+                    'post_id' => $post->id,
+                    'parent_id' => $comment->id, // Set as a reply to the top-level comment
+                ]);
             }
         }
     }

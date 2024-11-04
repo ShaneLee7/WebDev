@@ -22,8 +22,10 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(), // Create a new user for the comment
-            'post_id' => Post::factory(), // Create a new post for the comment
+            // Use an existing user randomly instead of creating a new one
+            'user_id' => User::inRandomOrder()->first()->id,
+            // Use an existing post randomly instead of creating a new one
+            'post_id' => Post::inRandomOrder()->first()->id,
             'content' => $this->faker->text(100),
             'parent_id' => null, // Top-level comment does not have a parent
         ];
@@ -37,14 +39,14 @@ class CommentFactory extends Factory
      */
     public function createWithReplies(int $replyCount = 3): Comment
     {
-        // Create the comment using the factory's definition
+        // Create the main comment
         $comment = $this->create();
 
         // Create replies for the comment
         for ($i = 0; $i < $replyCount; $i++) {
             Comment::factory()->create([
                 'post_id' => $comment->post_id,
-                'user_id' => User::factory(), // You can choose to assign a new user or the same user
+                'user_id' => User::inRandomOrder()->first()->id, // Select an existing user randomly for each reply
                 'parent_id' => $comment->id, // Set the parent_id to the original comment's ID
                 'content' => $this->faker->sentence(), // Generate random content for replies
             ]);
