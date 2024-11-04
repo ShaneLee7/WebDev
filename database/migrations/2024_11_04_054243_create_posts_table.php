@@ -6,20 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePostsTable extends Migration
 {
-    /**
+     /**
      * Run the migrations.
      */
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key to users table
-            $table->string('title');
-            $table->text('body'); 
-            $table->timestamps(); 
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->text('content');
+            $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */
