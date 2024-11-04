@@ -17,7 +17,7 @@ class LikeSeeder extends Seeder
     {
         Post::all()->each(function ($post) {
             // Each post receives likes from a random selection of users
-            User::inRandomOrder()->take(rand(1, 10))->get()->each(function ($user) use ($post) {
+            User::inRandomOrder()->take(rand(1, 5))->get()->each(function ($user) use ($post) {
                 Like::create([
                     'post_id' => $post->id,
                     'user_id' => $user->id,

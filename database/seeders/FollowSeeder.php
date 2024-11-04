@@ -18,7 +18,7 @@ class FollowSeeder extends Seeder
 
         $users->each(function ($user) use ($users) {
             // Each user follows a random subset of other users
-            $usersToFollow = $users->where('id', '!=', $user->id)->random(rand(1, 5));
+            $usersToFollow = $users->where('id', '!=', $user->id)->random(rand(1, 3));
 
             foreach ($usersToFollow as $followedUser) {
                 Follow::create([

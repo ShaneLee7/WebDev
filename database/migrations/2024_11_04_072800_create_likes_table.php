@@ -12,7 +12,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Log::info('Running likes migration...'); // Add logging
 
         Schema::create('likes', function (Blueprint $table) {
             $table->id(); // Auto-incrementing ID

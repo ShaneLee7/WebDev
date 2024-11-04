@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Comment extends Model
 {   
@@ -20,8 +21,18 @@ class Comment extends Model
         'user_id',
         'post_id',
         'content',
-        'parent_id',
-    ];
+        'parent_id'
+        ];
+
+   /**
+     * Get the replies for the comment based on comment ID.
+     *
+     * @return array<string, string>
+     */
+    public function replies(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'post_id', 'post_id'); 
+    }
 
     /**
      * Get the post that owns the comment.
@@ -42,16 +53,7 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     
-    /**
-     * Get the user replies
-     *
-     * @return string
-     */
-    public function replies()
-        {
-            return $this->hasMany(Comment::class, 'parent_id'); // Define replies relationship
-        }
-
-
 }
+

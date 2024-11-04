@@ -33,4 +33,14 @@ class Like extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
+   /**
+     * Get the total number of likes for the comment.
+     *
+     * @return int
+     */
+    public function totalLikes(): int
+    {
+        return $this->hasMany(Like::class)->count();
+    }
 }

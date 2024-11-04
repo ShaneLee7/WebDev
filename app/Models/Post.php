@@ -41,15 +41,5 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
-
-     /**
-     * Get the number of likes on post
-     *
-     * @return int
-     */
-    public function likes()
-    {
-        return $this->belongsToMany(User::class, 'likes');
-    }
 }
 
