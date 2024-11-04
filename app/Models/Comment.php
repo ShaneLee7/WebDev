@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Comment extends Model
-{
+{   
+     /** @use HasFactory<\Database\Factories\CommentFactory> */
     use HasFactory;
 
     /**
@@ -18,7 +18,8 @@ class Comment extends Model
     protected $fillable = [
         'user_id',
         'post_id',
-        'body',
+        'content',
+        'parent_id',
     ];
 
     /**
@@ -40,4 +41,16 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+    /**
+     * Get the user replies
+     *
+     * @return string
+     */
+    public function replies()
+        {
+            return $this->hasMany(Comment::class, 'parent_id'); // Define replies relationship
+        }
+
+
 }

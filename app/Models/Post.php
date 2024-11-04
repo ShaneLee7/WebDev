@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Post extends Model
-{
+{    
+    /** @use HasFactory<\Database\Factories\PostFactory> */
     use HasFactory;
 
     /**
@@ -17,15 +16,14 @@ class Post extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id',
-        'title',
+        'name',
         'body',
     ];
 
     /**
-     * Get the user that owns the post.
+     * Get the user that made the post.
      *
-     * @return BelongsTo
+     * @return string
      */
     public function user(): BelongsTo
     {
@@ -41,4 +39,15 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+     /**
+     * Get the number of likes on post
+     *
+     * @return int
+     */
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'likes');
+    }
 }
+
